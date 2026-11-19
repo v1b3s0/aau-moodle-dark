@@ -1,0 +1,805 @@
+/* Hand-written fixes. !important is used here on purpose: these are final
+   decisions, so they should beat any theme rule regardless of specificity. */
+
+/* ---------- Top header + navigation bar: one family with the palette ---------- */
+#main-header,
+#page-header {
+  background-color: var(--surface) !important;
+  background-image: none !important;
+}
+.header-light2 #main-navigation .main-navigation-inner,
+.header-light2 .mobile-nav {
+  background-color: var(--surface-2) !important;
+}
+.header-light2 .main-menu > li > a,
+.header-light2 .main-menu > li > button {
+  background-color: transparent !important;
+}
+.header-light2 .main-menu > li > a:hover,
+.header-light2 .main-menu > li > button:hover,
+.header-light2 .main-menu > li:hover > a,
+.header-light2 .main-menu > li:hover > button,
+.header-light2 .main-menu > li.search-item > a,
+.header-light2 .main-menu > li.search-item > button,
+.header-light2 .main-menu > li.bookmarks-item > a,
+.header-light2 .main-menu > li.bookmarks-item > button {
+  background-color: var(--surface-3) !important;
+}
+
+/* ---------- Logo: the SVG's dark text is unreadable on dark ----------
+   Option A (active): monochrome white logo.
+   Option B: keep the colours on a light rounded chip — swap the comments. */
+.main-logo img {
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+}
+/*
+.main-logo img {
+  background: #f4f6f8;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+*/
+
+/* ---------- Blocks ---------- */
+#block-region-content .block,
+#block-region-content .block.card,
+.style-default .block,
+.style-default .block.card {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+}
+#block-region-content .block > .header,
+#block-region-content .block .card-title,
+.style-default .block > .header,
+.style-default .block .card-title {
+  background-color: var(--surface-2) !important;
+  background-image: none !important;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- Course cards: lift them off the block ---------- */
+.dashboard-card {
+  background-color: var(--surface-2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 10px !important;
+  /* no overflow:hidden here: it clipped the "Star this course" menu */
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+/* round the image's top corners instead, so the card still looks rounded */
+.dashboard-card .dashboard-card-img {
+  border-radius: 9px 9px 0 0;
+}
+/* the card whose menu is open sits above its neighbours, but BELOW the
+   sticky nav bar (#main-navigation.sticky-nav-element is z-index 4) */
+.dashboard-card:hover,
+.dashboard-card:focus-within {
+  position: relative;
+  z-index: 3;
+}
+.dashboard-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+}
+.dashboard-card .card-footer,
+.dashboard-card-footer {
+  background-color: transparent !important;
+}
+.dashboard-card .coursename,
+.dashboard-card .multiline {
+  color: var(--text) !important;
+}
+
+/* ---------- Grey outline buttons (ALL / SORT / CARD, timeline filters) ---------- */
+.btn-outline-secondary {
+  color: var(--text) !important;
+  background-color: var(--surface-3) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+}
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus,
+.show > .btn-outline-secondary.dropdown-toggle {
+  background-color: var(--border) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+
+/* ---------- Every dropdown menu (sort menus, card menus, etc.) ---------- */
+.dropdown-menu {
+  background-color: var(--surface-2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+.dropdown-item {
+  color: var(--text) !important;
+}
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--surface-3) !important;
+}
+.dropdown-divider {
+  border-top-color: var(--border) !important;
+}
+
+/* ---------- Profile menu (the one under your student ID) ---------- */
+.theme-loginform .theme-loginform-inner .theme-loginform-form {
+  background-color: var(--surface-2) !important;
+  border: 1px solid var(--border);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+.theme-loginform .theme-loginform-form > a,
+.theme-loginform .theme-loginform-inner .theme-loginform-form .loginlinks {
+  background-color: var(--surface-3) !important;
+  background-image: none !important;   /* kills the diagonal stripe pattern */
+}
+.theme-loginform .usermenu .dropdown-item,
+.theme-loginform .usermenu .menu > li > a {
+  color: var(--text-soft) !important;
+}
+.theme-loginform .usermenu .dropdown-item:hover,
+.theme-loginform .usermenu .dropdown-item:focus,
+.theme-loginform .usermenu .menu > li > a:hover {
+  color: var(--text) !important;
+  background-color: var(--surface-3) !important;
+}
+.theme-loginform .usermenu .dropdown-divider {
+  border-top-color: var(--border) !important;
+}
+
+/* ---------- Readability: brighter + a bit bolder ---------- */
+body { font-weight: 500; }
+a,
+.activityname,
+.instancename,
+.coursename,
+.tree_item,
+.tree_item a,
+.block .header h2,
+.course-section .sectionname,
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600 !important;
+}
+.tree_item,
+.tree_item a,
+.tree_item .icon,
+.block_navigation .icon,
+.activityname,
+.activityname a,
+.instancename,
+.course-section .sectionname,
+.course-section .sectionname a {
+  color: var(--text) !important;
+}
+
+/* ---------- Hover = colour change, not "dim white -> bright white" ---------- */
+a { color: var(--accent); }
+a:hover,
+a:focus,
+.tree_item a:hover,
+.tree_item:hover > a,
+.activityname a:hover,
+.activityname a:hover .instancename,
+.course-section .sectionname a:hover,
+.dashboard-card .coursename:hover,
+.dropdown-item:hover,
+.dropdown-item:focus,
+.theme-loginform .usermenu .dropdown-item:hover,
+.theme-loginform .usermenu .menu > li > a:hover,
+.header-light2 .main-menu > li > a:hover,
+.header-light2 .main-menu > li > button:hover,
+.header-light2 .main-menu > li:hover > a,
+.header-light2 .main-menu > li:hover > button {
+  color: var(--hover) !important;
+}
+
+/* ---------- Text boxes ---------- */
+.form-control,
+.custom-select,
+textarea,
+select,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="number"],
+input[type="url"],
+.path-login.custom-login #login input,
+.path-login.default-login #login input {
+  background-color: var(--input-bg) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--input-bg) !important;  /* solid, same colour as the fill: invisible, and it covers the edge */
+  background-clip: padding-box !important;       /* keep the browser's autofill colour from bleeding under the border */
+  border-radius: 8px;
+}
+.form-control:focus,
+textarea:focus,
+select:focus,
+input:focus {
+  box-shadow: 0 0 0 3px rgba(249, 22, 94, 0.3) !important;
+  outline: none;
+}
+::placeholder { color: var(--text-soft) !important; opacity: 0.6; }
+
+/* Browser autofill (the yellow boxes on the login page).
+   The inset shadow paints over the browser's own autofill background. */
+input:autofill,
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+  caret-color: var(--text);
+  filter: none !important;
+}
+
+/* ---------- Search overlay (after clicking the magnifier) ---------- */
+.theme-searchform {
+  background-color: var(--surface-2) !important;
+  border-bottom: 1px solid var(--border);
+}
+.theme-searchform input[type="text"] {
+  background-color: transparent !important;
+  border: 0 !important;
+  border-bottom: 2px solid var(--border) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.theme-searchform input[type="text"]:focus {
+  border-bottom-color: var(--hover) !important;
+}
+.theme-searchform form button i {
+  background-color: var(--accent-deep) !important;
+  color: #fff !important;
+}
+.theme-searchform form button:hover i {
+  background-color: var(--accent) !important;
+}
+.theme-searchform .search-close { color: var(--text) !important; }
+.theme-searchform .search-close:hover,
+.theme-searchform .search-close:focus { color: var(--hover) !important; }
+
+/* ---------- Course page section headers: warm underline ---------- */
+.course-section .course-section-header,
+.course-section .sectionname {
+  border-bottom-color: var(--accent) !important;
+}
+
+/* ---------- Focus rings ----------
+   Clicked with a mouse: no ring. Reached with the keyboard (Tab): orange ring. */
+:focus:not(:focus-visible) {
+  outline: none !important;
+}
+:focus-visible {
+  outline: 2px solid var(--hover) !important;
+  outline-offset: 2px;
+}
+/* Bootstrap's blue glow on focused buttons/links -> warm */
+.btn:focus, .btn.focus,
+.page-link:focus,
+.maincalendar .calendarmonth td a.day:focus,
+.drawer-toggles .drawer-toggler .btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(249, 22, 94, 0.35) !important;
+}
+
+/* ---------- Notifications / messages popover ---------- */
+.popover-region-container,
+.popover-region-footer-container {
+  background-color: var(--surface) !important;
+  border-color: var(--border) !important;
+}
+.popover-region-header-container {
+  border-bottom-color: var(--border) !important;
+}
+.popover-region-toggle::before { border-bottom-color: var(--border) !important; }
+.popover-region-toggle::after  { border-bottom-color: var(--surface) !important; }
+.popover-region .content-item-container .icon,
+.popover-region .content-item-container i {
+  color: var(--text-soft) !important;
+}
+.popover-region .content-item-container:hover {
+  background-color: var(--surface-2) !important;
+}
+
+/* ---------- Login page: the user / lock icons inside the boxes ---------- */
+.path-login.custom-login #login .form-group:before,
+.path-login.default-login #login .form-group:before {
+  color: var(--text-soft) !important;
+  opacity: 0.55;
+}
+
+/* ---------- Hidden: dashboard announcement banners ----------
+   Both banners ("Adding a new training course", "Moodle students Guide") are
+   relabelled LockDown Browser blocks (#inst159), not HTML blocks.
+   Scoped to the dashboard so the real LockDown block still shows inside quizzes. */
+#page-my-index #inst159,
+#page-my-index .block_lockdown_browser {
+  display: none !important;
+}
+
+/* ---------- Dashboard / Site home / My courses buttons under the nav bar: removed ---------- */
+#site-menu { display: none !important; }
+
+/* ---------- Breadcrumbs: bigger, with large click targets ----------
+   Each crumb is a padded box (easy to hit) that stays invisible until
+   hovered/clicked, then fills with the text-highlight colour. */
+/* the markup is <div class="breadcrumb"><nav><ol class="breadcrumb">, so target each box
+   separately; one shared rule applied the negative margin twice */
+#page-header div.breadcrumb {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+#page-header ol.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  margin: 0 0 0 -14px !important; /* cancels the first crumb's 14px padding: text lines up with the title */
+  padding: 0 !important;
+  background: transparent !important;
+  font-size: 1.15rem;
+}
+#page-header .breadcrumb nav { display: contents; }
+#page-header .breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 !important;
+}
+#page-header .breadcrumb-item > a,
+#page-header .breadcrumb-item > span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: var(--text) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+#page-header .breadcrumb-item > a:hover,
+#page-header .breadcrumb-item > a:focus-visible,
+#page-header .breadcrumb-item > a:active {
+  background-color: var(--highlight) !important;
+  color: #fff !important;
+  outline: none !important;
+}
+#page-header .breadcrumb-item > a[aria-current="page"] { color: var(--text-soft) !important; }
+#page-header .breadcrumb-item + .breadcrumb-item::before {
+  color: var(--text-soft) !important;
+  opacity: 0.45;
+  padding: 0 2px !important;
+}
+
+/* ---------- Activity / timeline icons: white glyph in the accent box ---------- */
+.activityiconcontainer .activityicon,
+.activityiconcontainer .icon,
+.activityiconcontainer img {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* ---------- Teachers' inline colours inside course content ----------
+   .no-overflow wraps text that teachers type in. Their hand-picked colours
+   (blue text, yellow highlight) get mapped onto the palette. */
+.no-overflow [style*="color"] {
+  color: var(--accent) !important;
+}
+.no-overflow [style*="background"] {
+  background-color: var(--highlight) !important;
+  color: var(--text) !important;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+::selection {
+  background: var(--highlight);
+  color: #fff;
+}
+
+/* ---------- Alerts: tinted dark boxes instead of pastel slabs ---------- */
+.alert { border-width: 0 0 0 4px !important; border-style: solid !important; border-radius: 8px !important; }
+.alert-success { background-color: var(--ok-bg) !important;   color: var(--ok-text) !important;   border-color: var(--ok-text) !important; }
+.alert-danger,
+.alert-error   { background-color: var(--bad-bg) !important;  color: var(--bad-text) !important;  border-color: var(--bad-text) !important; }
+.alert-warning { background-color: var(--warn-bg) !important; color: var(--warn-text) !important; border-color: var(--warn-text) !important; }
+.alert-info    { background-color: var(--info-bg) !important; color: var(--info-text) !important; border-color: var(--info-text) !important; }
+.alert a { color: inherit !important; text-decoration: underline; }
+.alert .close { color: currentColor !important; opacity: 0.7; text-shadow: none; }
+
+/* ---------- Assignment status rows (Submitted / Early / Late / Draft) ---------- */
+.path-mod-assign td.submissionstatussubmitted,
+.path-mod-assign div.submissionstatussubmitted,
+.path-mod-assign td.submissiongraded,
+.path-mod-assign div.submissiongraded,
+.path-mod-assign td.earlysubmission,
+.path-mod-assign div.earlysubmission {
+  background-color: var(--ok-bg) !important;
+  background-image: none !important;
+  color: var(--ok-text) !important;
+}
+.path-mod-assign td.latesubmission,
+.path-mod-assign div.latesubmission,
+.path-mod-assign .overdue,
+.path-mod-assign .overduesubmission {
+  background-color: var(--bad-bg) !important;
+  background-image: none !important;
+  color: var(--bad-text) !important;
+}
+.path-mod-assign td.submissionstatusdraft,
+.path-mod-assign div.submissionstatusdraft {
+  background-color: var(--warn-bg) !important;
+  color: var(--warn-text) !important;
+}
+.path-mod-assign td.submissionstatus,
+.path-mod-assign div.submissionstatus {
+  background-color: var(--surface-2) !important;
+}
+
+/* ---------- Course banner title bar (was slate blue-grey) ---------- */
+.theme-cbanner .cbanner-title,
+.theme-cbanner {
+  background-color: var(--surface-2) !important;
+  background-image: none !important;
+}
+
+/* ---------- Logo: no selection highlight when clicked ---------- */
+.main-logo,
+.main-logo a,
+.main-logo img {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  background: none !important;
+}
+.main-logo img::selection,
+.main-logo a::selection { background: transparent; }
+.main-logo a:focus { outline: none !important; }
+
+/* Desktop only: on phones (<=768px) the theme collapses these tools behind a toggle button,
+   and forcing them into a visible flex row would break that. */
+@media only screen and (min-width: 769px) {
+/* ---------- Top-right header: one aligned row, no separators ----------
+   The theme floats each group right with its own nudges, so nothing shares
+   a centre line. Flex rows (reversed, to keep the floated visual order)
+   centre everything on one axis. */
+.header-content { margin-top: 0 !important; }
+.header-content .header-content-b,
+.header-content .header-tools,
+.header-content .theme-plugins {
+  display: flex !important;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 0;                      /* spacing comes from the items themselves (below) */
+  float: none !important;
+}
+/* empty theme containers would otherwise take up space */
+.header-content .social-list:empty,
+.header-content .theme-plugins > :empty { display: none !important; }
+/* equal horizontal spacing between every visible item */
+.header-content .theme-usertools,
+.header-content .languages-list,
+.header-content .theme-loginform {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 22px !important;
+  margin-right: 0 !important;
+}
+.header-content .mw-bell {
+  margin-left: 12px !important;  /* the bell's 40px hover box has ~10px of air on each side */
+  margin-right: -10px !important;
+}
+.header-content .header-content-b { min-height: 64px; }
+.header-content .header-content-b > *,
+.header-content .header-tools > *,
+.header-content .theme-plugins > *,
+.header-content .theme-loginform,
+.header-content .theme-usertools,
+.header-content .languages-list,
+.header-content .social-list {
+  float: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.header-content .header-content-b > *::before,
+.header-content .header-content-b > *::after,
+.header-content .header-tools > *::before,
+.header-content .header-tools > *::after,
+.header-content .theme-plugins > *::before,
+.header-content .theme-plugins > *::after,
+.header-content .theme-usertools > div::before,
+.header-content .theme-usertools > div::after,
+.header-content .languages-list > li::before,
+.header-content .languages-list > li::after {
+  display: none !important;   /* the separator lines */
+}
+.header-content .theme-usertools,
+.header-content .theme-fontsizer {
+  display: flex !important;
+  align-items: center;
+  padding: 0 !important;
+}
+.header-content .theme-fontsizer {
+  align-items: baseline;      /* small / medium / big A share a baseline */
+  gap: 6px;
+}
+.header-content .languages-list {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 0 !important;
+}
+.header-content .languages-list li,
+.header-content .languages-list a,
+.header-content .languages-list img {
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
+}
+.header-content .mw-bell,
+.header-content .theme-loginform {
+  display: flex !important;
+  align-items: center;
+}
+.header-content .theme-loginform > .btn,
+.header-content .theme-loginform > a {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 !important;
+}
+}
+
+/* ---------- Main nav bar: no separators, (8) centred ---------- */
+.main-menu::before,
+.main-menu > li > a::before,
+.main-menu > li > button::before,
+.header-light2 .main-menu > li > a::before,
+.header-light2 .main-menu > li > button::before {
+  display: none !important;
+}
+.main-menu > li.mycourses .mycourses-num {
+  vertical-align: middle !important;
+  margin-left: 4px;
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+/* ---------- Initials avatars everywhere: proper circles ---------- */
+.userinitials {
+  background-color: var(--surface-3) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 600 !important;
+  box-sizing: border-box !important;
+}
+
+/* ---------- Profile page header (name + initials) ---------- */
+.page-context-header {
+  display: flex !important;
+  align-items: center;
+  gap: 20px;
+  column-count: auto !important;
+  padding: 8px 0 !important;
+}
+.page-context-header .page-header-image,
+.page-context-header .page-header-headings {
+  display: flex !important;
+  align-items: center;
+  top: 0 !important;
+  margin: 0 !important;
+  float: none !important;
+}
+.page-context-header .userinitials.size-100 {
+  width: 88px !important;
+  height: 88px !important;
+  font-size: 1.9rem !important;
+  margin: 0 !important;
+}
+.userprofile .page-context-header .page-header-headings h1,
+.userprofile .page-context-header .page-header-headings h2 {
+  font-size: 1.6rem !important;
+  margin: 0 !important;
+}
+
+/* ---------- User menu (under the student-ID button): one clean panel ---------- */
+.theme-loginform .theme-loginform-form > a {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+.theme-loginform .theme-loginform-form > a .userinitials,
+.theme-loginform .theme-loginform-form > a img {
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  line-height: 1 !important;
+  font-size: 15px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* the global dropdown look (border, radius, shadow) made a box inside the box here */
+.theme-loginform .usermenu .dropdown-menu,
+.theme-loginform .usermenu .menu {
+  position: static !important;
+  display: block !important;
+  float: none !important;
+  margin: 0 !important;
+  padding: 4px 8px 8px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  min-width: 0 !important;
+  transform: none !important;
+}
+.theme-loginform .usermenu .dropdown-divider,
+.theme-loginform .usermenu .filler {
+  display: none !important;
+}
+.theme-loginform .usermenu .dropdown-item {
+  display: block;
+  padding: 10px 12px !important;
+  margin: 2px 0 !important;
+  border-radius: 8px !important;
+  border: 0 !important;
+  color: var(--text) !important;
+}
+.theme-loginform .usermenu .dropdown-item:hover,
+.theme-loginform .usermenu .dropdown-item:focus {
+  background-color: var(--surface-3) !important;
+  color: var(--hover) !important;
+}
+
+/* ---------- Filled buttons keep white text in every state ---------- */
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:not(:disabled):not(.disabled):active {
+  color: #fff !important;
+}
+
+/* ---------- Mobile-app QR code: dark modules need a light backing to scan ---------- */
+#qrcode img, #qrcode canvas,
+.qrcode img, .qrcode canvas,
+img[alt*="QR" i] {
+  background: #fff !important;
+  padding: 14px !important;
+  border-radius: 10px !important;
+}
+
+/* ---------- Navigation block: colour-coded courses ----------
+   Colours, order and short names live in the "AAU Moodle Courses" userscript,
+   which sets --course on each link; this only defines the look. */
+.block_navigation .tree_item a[style*="--course"] {
+  background-color: rgba(var(--course), 0.30);
+  color: var(--text) !important;
+  border-radius: 6px;
+  padding: 2px 8px;
+  transition: background-color 0.12s ease;
+}
+.block_navigation .tree_item a[style*="--course"]:hover,
+.block_navigation .tree_item a[style*="--course"]:focus-visible {
+  background-color: rgba(var(--course), 0.50);
+  color: #fff !important;
+}
+
+/* ---------- User menu: duplicate "Preferences" entry hidden ----------
+   Moodle lists both /user/preferences.php and /user/preferences.php/preferences. */
+.theme-loginform .usermenu a[href$="preferences.php/preferences"] {
+  display: none !important;
+}
+/* stronger selector for the menu's initials: another rule was overriding size/font */
+.theme-loginform .theme-loginform-inner .theme-loginform-form > a span.userinitials {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ---------- Course overview: drop the space reserved for Moodle's cards ---------- */
+.block_myoverview .content,
+.block_myoverview .card-text {
+  min-height: 0 !important;
+  padding-bottom: 20px !important;   /* same as the space above the boxes */
+}
+.block_myoverview .card-text > .footer:empty { display: none !important; }
+
+/* ---------- User-menu initials: also when there's no link around them ----------
+   On your own profile page Moodle puts the span straight into the panel (no <a>). */
+.theme-loginform .theme-loginform-inner .theme-loginform-form > span.userinitials {
+  display: inline-flex !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  font-size: 15px !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  margin: 14px 16px 6px !important;
+}
+
+/* ---------- Initials circles: white border ---------- */
+.userinitials {
+  border: 1.5px solid rgba(255, 255, 255, 0.85) !important;
+}
+
+/* ---------- Student-ID button: space between the person icon and the number ---------- */
+.theme-loginform .login-open {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+}
+.theme-loginform .login-open i { margin: 0 !important; }
+
+/* ---------- User menu header: identical with or without the profile link ----------
+   Dashboard: <a><span.userinitials></a> (had a grey strip). Profile page: bare <span>.
+   Both now: no strip, circle at the same spot. */
+.theme-loginform .theme-loginform-inner .theme-loginform-form > a {
+  background: transparent !important;
+  background-image: none !important;
+  padding: 14px 16px 6px !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+.theme-loginform .theme-loginform-inner .theme-loginform-form > a span.userinitials,
+.theme-loginform .theme-loginform-inner .theme-loginform-form > span.userinitials {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  font-size: 15px !important;
+}
+.theme-loginform .theme-loginform-inner .theme-loginform-form > span.userinitials {
+  margin: 14px 16px 6px !important;
+}
+
+/* ---------- Quiz pages (display only) ---------- */
+/* "Question N" badge: was the theme's brick red */
+.que .info > h3,
+.que .info > h3.no {
+  background-color: var(--accent-deep) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+}
+.que .info {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+}
+/* Teachers' hand-styled boxes inside questions (light panels, black "terminal" boxes, tables):
+   our text is near-white, so any light inline background made it unreadable. Every inline
+   background becomes a dark surface; their text colours (green code, red marks) are kept. */
+.que .formulation [style*="background"] {
+  background-color: var(--surface-2) !important;
+  background-image: none !important;
+}
+.que .formulation .theme-table-wrap {
+  background: transparent !important;
+}
+/* answer boxes inside those tables: visible edges so each cell reads as a box */
+.que .formulation table input.form-control {
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  min-width: 3.2em;
+  text-align: center;
+}
+.que .formulation table input.form-control:focus {
+  border-color: var(--hover) !important;
+}

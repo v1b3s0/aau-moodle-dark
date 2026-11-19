@@ -1,0 +1,6 @@
+# The university theme's own stylesheet (input to the generator): never commit it.
+all.css
+*.all.css
+# Intermediate generator output; the installable file is aau-moodle-dark.user.css
+build/aau-moodle-dark.css
+__pycache__/
